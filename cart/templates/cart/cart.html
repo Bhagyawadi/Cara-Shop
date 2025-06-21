@@ -1,0 +1,131 @@
+{% extends 'cart/base.html' %} {% block content %}
+<section id="page-header" class="about-header">
+    <h2>#Klet's_talk</h2>
+    <p>LEAVE A MESSAGE, We love to hear from you</p>
+</section>
+
+<section id="cart" class="section-p1">
+    <table width="100%">
+        <thead>
+            <tr>
+                <td>Remove</td>
+                <td>Image</td>
+                <td>Product</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Subtotal</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="#"><i class="fa-regular fa-circle-xmark"></i></a>
+                </td>
+                <td><img src="/static/cart/img/products/f1.jpg" alt=""></td>
+                <td>Cartoon Astraunot T-Shirts</td>
+                <td>$118.19</td>
+                <td><input type="number" value="1"></td>
+                <td>$118.19</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#"><i class="fa-regular fa-circle-xmark"></i></a>
+                </td>
+                <td><img src="/static/cart/img/products/f2.jpg" alt=""></td>
+                <td>Cartoon Astraunot T-Shirts</td>
+                <td>$118.19</td>
+                <td><input type="number" value="1"></td>
+                <td>$118.19</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#"><i class="fa-regular fa-circle-xmark"></i></a>
+                </td>
+                <td><img src="/static/cart/img/products/f3.jpg" alt=""></td>
+                <td>Cartoon Astraunot T-Shirts</td>
+                <td>$118.19</td>
+                <td><input type="number" value="1"></td>
+                <td>$118.19</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="cart-add" class="section-p1">
+    <div id="coupon">
+        <h3>Apply Coupon</h3>
+        <div>
+            <input type="text" placeholder="Enter Your Coupon">
+            <button class="normal">Apply</button>
+        </div>
+    </div>
+    <div id="subtotal">
+        <h3>Cart Totals</h3>
+        <table>
+            <tr>
+                <td>Cart Subtotal</td>
+                <td>$ 335</td>
+            </tr>
+            <tr>
+                <td>Shipping</td>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>$335</strong></td>
+            </tr>
+        </table>
+        <button class="normal">Proceed To Checkout</button>
+    </div>
+</section>
+
+{% endblock content %}{% block js %}
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.cart').click(function() {
+        var idstr = this.id.toString();
+
+        if (cart[idstr] != undefined) {
+            cart[idstr] = cart[idstr] + 1;
+        } else {
+            cart[idstr] = 1;
+        }
+        updateCart(cart);
+
+    });
+
+
+    <!-- updating cart -->
+    function updateCart(cart) {
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = "<button id='minus" +
+                item + "' class='btn btn-primary minus'>-</button> <span id='val" +
+                item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.divpr').on('click', 'button.minus', function() {
+        a = this.id.slice(7, )
+        cart['pr' + a] = cart['pr' + a] - 1;
+        cart['pr' + a] = Math.max(0, cart['pr' + a])
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+
+
+    $('.divpr').on('click', 'button.plus', function() {
+        a = this.id.slice(6, )
+        cart['pr' + a] = cart['pr' + a] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+</script>
+{% endblock %}

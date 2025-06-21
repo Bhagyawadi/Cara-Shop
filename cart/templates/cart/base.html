@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 
+    {% block title %}
+        
+    {% endblock title %}
+        </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'cart/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+</head>
+
+<body>
+    <section id="header">
+        <a href="/cart">
+            <img src="/static/cart/img/logo.png" class="logo" alt="">
+        </a>
+        <div>
+            <ul id="navbar">
+                <li>
+                    <a class="{% if request.path == '/cart/' %} active {% endif %}" href="/cart">Home</a>
+                </li>
+                <li>
+                    <a class="{% if request.path == '/cart/shop/' %} active {% endif %}" href="/cart/shop">Shop</a>
+                </li>
+                <li>
+                    <a class="{% if request.path == '/cart/blog/' %} active {% endif %}" href="/cart/blog">Blog</a>
+                </li>
+                <li>
+                    <a class="{% if request.path == '/cart/about/' %} active {% endif %}" href="/cart/about">About</a>
+                </li>
+                <li>
+                    <a class="{% if request.path == '/cart/contact/' %} active {% endif %}" href="/cart/contact">Contact</a>
+                </li>
+                <li>
+                    <a class="{% if request.path == '/cart/tracker/' %} active {% endif %}" href="/cart/tracker">Tracker</a>
+                </li>
+                <li id="lg-bag">
+                    <a class="{% if request.path == '/cart/cart/' %} active {% endif %}" href="/cart/cart">
+                        <i class="fa-solid fa-bag-shopping cart1"></i>
+                    </a>
+                </li>
+                <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content="Vivamus
+                sagittis lacus vel augue laoreet rutrum faucibus.">
+                Cart(<span id="cart">0</span>)  
+                </button>
+                <a href="#" id="close">
+                    <i class="fa-solid fa-x"></i>
+                </a>
+            </ul>   
+        </div>
+        <div id="mobile">
+            <a href="cart.html"> <i class="fa-solid fa-bag-shopping"></i></a>
+            <i id="bar" class="fa-solid fa-outdent"></i>
+        </div>
+    </section>
+
+    {% block content %} {% endblock content %}
+
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletter</h4>
+            <p>Get E-mail updates about our latest shops and <span>special offers.</span></p>
+            < </div>
+                <div class="form">
+                    <input type="text" placeholder="Your email address">
+                    <button class="normal">Sign Up</button>
+                </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <!-- <img class="logo" src="img/logo.png" alt=""> -->
+            <h4>Contact</h4>
+            <p><strong>Address : </strong>562 Wellington Road. Street 32. San Francisco</p>
+            <p><strong>Phone : </strong>+01 2222 365 / (+91) 01 2345 6789</p>
+            <p><strong>Hours : </strong>10:00 - 18:00 Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-pinterest"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Poicy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Whistlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play Store</p>
+            <div class="row">
+                <img src="/static/cart/img/pay/app.jpg" alt="">
+                <img src="/static/cart/img/pay/play.jpg" alt="">
+            </div>
+            <p>Secure Payment Gateways</p>
+            <img src="/static/cart/img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>2024 , All Copyright Reserved</p>
+        </div>
+    </footer>
+
+    <script src="/static/cart/js/script.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    {% block js %} {% endblock %}
+
+</body>
+
+</html>

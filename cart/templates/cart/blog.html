@@ -1,0 +1,120 @@
+{% extends 'cart/base.html' %} {% block content %}
+<section id="page-header" class="blog-header">
+    <h2>#readmore</h2>
+    <p>Read all case stidies about our products!</p>
+</section>
+
+<section id="blog">
+    <div class="blog-box">
+        <div class="blog-img">
+            <img src="/static/cart/img/blog/b1.jpg" alt="">
+        </div>
+        <div class="blog-details">
+            <h4>The Cotton-Jersey Zip-Up Hoodie</h4>
+            <p>Kickstarter man braid godard coloring back. Racklette waistcoat slefies yr wolf chartreuse hexagon irony godard... </p>
+            <a href="#">CONTINUE READING</a>
+        </div>
+        <h1>13/01</h1>
+    </div>
+    <div class="blog-box">
+        <div class="blog-img">
+            <img src="/static/cart/img/blog/b2.jpg" alt="">
+        </div>
+        <div class="blog-details">
+            <h4>How to Style a Quiff</h4>
+            <p>Kickstarter man braid godard coloring back. Racklette waistcoat slefies yr wolf chartreuse hexagon irony godard... </p>
+            <a href="#">CONTINUE READING</a>
+        </div>
+        <h1>13/04</h1>
+    </div>
+    <div class="blog-box">
+        <div class="blog-img">
+            <img src="/static/cart/img/blog/b3.jpg" alt="">
+        </div>
+        <div class="blog-details">
+            <h4>Must Have Skatter Girl Items</h4>
+            <p>Kickstarter man braid godard coloring back. Racklette waistcoat slefies yr wolf chartreuse hexagon irony godard... </p>
+            <a href="#">CONTINUE READING</a>
+        </div>
+        <h1>12/01</h1>
+    </div>
+    <div class="blog-box">
+        <div class="blog-img">
+            <img src="/static/cart/img/blog/b4.jpg" alt="">
+        </div>
+        <div class="blog-details">
+            <h4>Runaway Inspired Trends</h4>
+            <p>Kickstarter man braid godard coloring back. Racklette waistcoat slefies yr wolf chartreuse hexagon irony godard... </p>
+            <a href="#">CONTINUE READING</a>
+        </div>
+        <h1>16/01</h1>
+    </div>
+    <div class="blog-box">
+        <div class="blog-img">
+            <img src="/static/cart/img/blog/b6.jpg" alt="">
+        </div>
+        <div class="blog-details">
+            <h4>AW20 MensWear Trends</h4>
+            <p>Kickstarter man braid godard coloring back. Racklette waistcoat slefies yr wolf chartreuse hexagon irony godard... </p>
+            <a href="#">CONTINUE READING</a>
+        </div>
+        <h1>10/03</h1>
+    </div>
+</section>
+
+<section id="pagination">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+</section>
+
+{% endblock content %}{% block js %}
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.cart').click(function() {
+        var idstr = this.id.toString();
+
+        if (cart[idstr] != undefined) {
+            cart[idstr] = cart[idstr] + 1;
+        } else {
+            cart[idstr] = 1;
+        }
+        updateCart(cart);
+
+    });
+
+
+    <!-- updating cart -->
+    function updateCart(cart) {
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = "<button id='minus" +
+                item + "' class='btn btn-primary minus'>-</button> <span id='val" +
+                item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.divpr').on('click', 'button.minus', function() {
+        a = this.id.slice(7, )
+        cart['pr' + a] = cart['pr' + a] - 1;
+        cart['pr' + a] = Math.max(0, cart['pr' + a])
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+
+
+    $('.divpr').on('click', 'button.plus', function() {
+        a = this.id.slice(6, )
+        cart['pr' + a] = cart['pr' + a] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+</script>
+{% endblock %}

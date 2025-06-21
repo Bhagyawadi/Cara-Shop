@@ -1,0 +1,105 @@
+{% extends 'cart/base.html' %} {% block content %}
+<section id="page-header" class="about-header">
+    <h2>#KnowUs</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur</p>
+</section>
+
+<section id="about-head" class="section-p1">
+    <img src="/static/cart/img/about/a6.jpg" alt="">
+    <div>
+        <h2>Who We Are?</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio officiis eius in nobis dolorum porro autem cumque facere illo laborum fuga saepe, qui reiciendis ratione. Vel, nam. Distinctio, omnis optio.</p>
+
+        <abbr title="">Create stunning images with as much or as little control as you like thanks t a choice of basic and creative modes </abbr>
+
+        <br><br>
+
+        <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Create stunning images with as much or as little control as you like thanks t a choice of basic and creative modes</marquee>
+    </div>
+</section>
+
+<section id="about-app" class="section-p1">
+    <h1>Download Our
+        <a href="#">App</a>
+    </h1>
+    <div class="video">
+        <video autoplay muted loop src="/static/cart/img/about/1.mp4"></video>
+    </div>
+</section>
+
+<section id="feature" class="section-p1">
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f1.png" alt=" ">
+        <h6>Free Shipping</h6>
+    </div>
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f2.png" alt="">
+        <h6>Online Order</h6>
+    </div>
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f3.png" alt="">
+        <h6>Save Money</h6>
+    </div>
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f4.png" alt="">
+        <h6>Promotions</h6>
+    </div>
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f5.png" alt="">
+        <h6>Happy Sell</h6>
+    </div>
+    <div class="fea-box">
+        <img src="/static/cart/img/features/f6.png" alt="">
+        <h6>F24/7 Support</h6>
+    </div>
+</section>
+{% endblock content %}{% block js %}
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.cart').click(function() {
+        var idstr = this.id.toString();
+
+        if (cart[idstr] != undefined) {
+            cart[idstr] = cart[idstr] + 1;
+        } else {
+            cart[idstr] = 1;
+        }
+        updateCart(cart);
+
+    });
+
+
+    <!-- updating cart -->
+    function updateCart(cart) {
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = "<button id='minus" +
+                item + "' class='btn btn-primary minus'>-</button> <span id='val" +
+                item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+
+
+    $('.divpr').on('click', 'button.minus', function() {
+        a = this.id.slice(7, )
+        cart['pr' + a] = cart['pr' + a] - 1;
+        cart['pr' + a] = Math.max(0, cart['pr' + a])
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+
+
+    $('.divpr').on('click', 'button.plus', function() {
+        a = this.id.slice(6, )
+        cart['pr' + a] = cart['pr' + a] + 1;
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    });
+</script>
+{% endblock %}

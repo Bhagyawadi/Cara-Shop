@@ -1,0 +1,86 @@
+{% extends 'cart/base.html' %} {% block content %}
+
+<section id="prodetails" class="section-p1">
+    <div class="single-pro-image">
+        <div class="small-img-group">
+            <img src="/media/{{products.image}}" width="100%" id="MainImg" alt="">
+        </div>
+    </div>
+    <div class="single-pro-details">
+        <h6>Home / T-Shirt</h6>
+        <h4>{{products.product_name}}</h4>
+        <h2>${{products.price}}</h2>
+        <select>'
+                <option selected>Select Size</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
+        <input type="number" value="1">
+        <a href="/cart/cart"><button class="normal">Add To Cart</button></a>
+        <h4>Product Details</h4>
+        <span>The Gildan Ultra Cotton T-Shirt is made from a substantial 6.0 oz. per. sq. yd.
+                fabric constructed from 100% cotton, this classic fit preshrunk jsersey knit provides
+                unmatched comfort with each wear. Featuring a toped neck and shoulder, and a double needle
+                collar, and  available in a range of color, ot offers it all in the ultimate head-turning package
+            </span>
+    </div>
+</section>
+
+
+<section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Summer Collection New Mordern Design</p>
+    <div class="prod-container">
+
+        {% for i in allprods|slice:"1:5" %}
+        <div class="prod">
+            <img src="/media/{{i.image}}" alt="">
+            <div class="des">
+                <span>{{i.product_name}}</span>
+                <h5>{{i.desc}}</h5>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>${{i.price}}</h4>
+            </div>
+            <a href="#"> <i class="fas fa-cart-shopping cart1"></i></a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %} {% block js %}
+<!-- <script>
+    var MainImg = document.getElementById("MainImg");
+    var smallimg = document.getElementsByClassName("small-img");
+
+    smallimg[0].onclick = function() {
+        MainImg.src = smallimg[0].src;
+    }
+
+    smallimg[1].onclick = function() {
+        MainImg.src = smallimg[1].src;
+    }
+
+    smallimg[2].onclick = function() {
+        MainImg.src = smallimg[2].src;
+    }
+
+    smallimg[3].onclick = function() {
+        MainImg.src = smallimg[3].src;
+    }
+
+    checking cart -->
+console.log("testing"); if (localStorage.getItem('cart') == null) { var cart = {}; } else { cart = JSON.parse(localStorage.getItem('cart')); document.getElementById('cart').innerHTML = Object.keys(cart).length; } $('.cart1').click(function() { console.log('cliked');
+var idstr = this.id.toString(); console.log(idstr); if (cart[idstr] != undefined) { cart[idstr] = cart[idstr] + 1; } else { cart[idstr] = 1 } console.log(cart) localStorage.setItem('cart', JSON.stringify(cart)) document.getElementById('cart').innerHTML
+= Object.keys(cart).length; });
+<!-- </script> -->
+
+<script src="script.js"></script>
+{% endblock %}
